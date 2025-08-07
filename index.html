@@ -1,1 +1,128 @@
-<h1> hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GitHub Setup Guide (Hinglish)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fefefe;
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+      line-height: 1.8;
+    }
+    h1, h2 {
+      color: #222;
+    }
+    pre {
+      background: #f4f4f4;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    code {
+      background: #eaeaea;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    a {
+      color: #007acc;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 GitHub Setup A-Z (Hinglish Guide)</h1>
+
+  <div class="section">
+    <h2>1. Zaroori Cheezein (Requirements)</h2>
+    <ul>
+      <li><a href="https://github.com/signup" target="_blank">GitHub Account</a></li>
+      <li><a href="https://cli.github.com/manual/installation" target="_blank">GitHub CLI (gh)</a></li>
+      <li><a href="https://git-scm.com/downloads" target="_blank">Git</a></li>
+      <li><a href="https://code.visualstudio.com/" target="_blank">VS Code (optional)</a></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2. SSH Key Setup</h2>
+    <p>Terminal mein yeh likho:</p>
+    <pre><code>ssh-keygen -t ed25519 -C "youremail@example.com"</code></pre>
+    <p>Phir key dekhne ke liye:</p>
+    <pre><code>cat ~/.ssh/id_ed25519.pub</code></pre>
+    <p>Is key ko yaha paste karo: <a href="https://github.com/settings/ssh/new" target="_blank">Add SSH Key on GitHub</a></p>
+  </div>
+
+  <div class="section">
+    <h2>3. GitHub CLI Login</h2>
+    <pre><code>gh auth login</code></pre>
+    <p>Select: GitHub.com → SSH → Browser se login karo</p>
+  </div>
+
+  <div class="section">
+    <h2>4. Aliases (Shortcut Commands)</h2>
+    <pre><code>
+alias gitstart='git init && git add . && git commit -m "🚀 First commit"'
+
+alias gitall='git add . && git commit -m "🧠 Auto Save" && git push origin main'
+
+alias mkrepo='
+  read -p "📁 Repo Name: " reponame;
+  read -p "🔒 Private or Public? (private/public): " visibility;
+  gh repo create "$reponame" --$visibility --source=. --remote=origin --push
+'
+
+alias mkpages='
+  gh repo edit --add-topic github-pages;
+  gh api -X POST repos/:owner/:repo/pages --field "source[branch]=main" --field "source[path]=/";
+  echo "✅ GitHub Pages enabled!";
+  echo "🔗 https://$(gh repo view --json nameWithOwner -q ".nameWithOwner" | sed "s/\\\"//g").github.io"
+'
+    </code></pre>
+  </div>
+
+  <div class="section">
+    <h2>5. Daily Workflow (A-Z)</h2>
+    <pre><code>
+cd ~/
+mkdir mera-project && cd mera-project
+code .
+
+gitstart
+
+mkrepo
+# 📁 Enter repo name → jaise: my-website
+# 🔒 Enter visibility → public ya private
+
+git branch -m master main
+git push -u origin main
+
+mkpages
+    </code></pre>
+    <p>Yeh sab karne ke baad tera site live ho jayega!</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Links Reference</h2>
+    <ul>
+      <li><a href="https://github.com" target="_blank">GitHub</a></li>
+      <li><a href="https://cli.github.com" target="_blank">GitHub CLI</a></li>
+      <li><a href="https://git-scm.com/doc" target="_blank">Git Docs</a></li>
+      <li><a href="https://www.markdownguide.org/" target="_blank">Markdown Guide</a></li>
+    </ul>
+  </div>
+
+  <footer>
+    <p>🔥 Banaaya gaya by <strong>Rishi</strong> for apne doston 💙</p>
+  </footer>
+</body>
+</html>
+
